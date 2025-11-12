@@ -13,7 +13,7 @@ type SceneProps = {
 
 export function Scene({ layer }: SceneProps) {
   return (
-    <Suspense fallback={<div style={{ color: "#888", padding: 12 }}>Loading 3D…</div>}>
+    <Suspense fallback={<div style={{ color: "#888", padding: 12 }}>3Dを読み込み中…</div>}>
       {/* ライト */}
       <ambientLight intensity={0.7} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} />

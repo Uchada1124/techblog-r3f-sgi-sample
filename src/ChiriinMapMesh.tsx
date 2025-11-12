@@ -29,7 +29,7 @@ function loadImage(url: string): Promise<HTMLImageElement> {
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = () => resolve(img);
-    img.onerror = () => reject(new Error(`load error: ${url}`));
+    img.onerror = () => reject(new Error(`画像の取得に失敗しました: ${url}`));
     img.src = url;
   });
 }
@@ -78,7 +78,7 @@ export function GsiMergedTilePlane({
         canvas.width = count * tileSize;
         canvas.height = count * tileSize;
         const ctx = canvas.getContext("2d");
-        if (!ctx) throw new Error("failed to acquire canvas context");
+        if (!ctx) throw new Error("キャンバスのコンテキスト取得に失敗しました");
 
         images.forEach((img, i) => {
           const col = i % count;

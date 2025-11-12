@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Scene } from "./Scene.tsx";
+import { type Layer } from "./GsiMergedTilePlane";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [layer, setLayer] = useState<Layer>("std");
 
   return (
-    <>
+    <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      <Canvas
+        camera={{ position: [10, 10, 10], fov: 60 }}
+        style={{ background: "#f5f6fb" }}
+      >
+        <Scene layer={layer} />
+      </Canvas>
+
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {(["std", "seamlessphoto"] as Layer[]).map((value) => (
+          <button
+            key={value}
+            onClick={() => setLayer(value)}
+          >
+            {value === "std" ? "標準地図" : "航空写真"}
+          </button>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
